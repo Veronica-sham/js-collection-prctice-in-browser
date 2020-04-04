@@ -1,44 +1,35 @@
 'use strict';
 
 function countSameElements(collection) {
-   var collectionLength = collection.length;
-      var character;
-      var count;
-      var output = [];
-      var outputCount = 0;
-      var exist = false;
-      var a = 1;
-      var b = 0;
-      output[0] = {name:collection[0], summary:1};
-      for (a = 1; a < collectionLength; a++){
-      if (collection[a].includes("-")){
-    	  character = collection[a].substring(0,collection[a].indexOf("-"));
-    	  count = parseInt(collection[a].substring(collection[a].indexOf("-")+1));
-        }
-      else if (collection[a].includes("]") && collection[a].includes("[")){
-           character = collection[a].substring(0,collection[a].indexOf("["));
-           count = parseInt(collection[a].substring(collection[a].indexOf("[")+1,collection[a].indexOf("]")));
-      }
-      else if (collection[a].includes(":")){
-           character = collection[a].substring(0,collection[a].indexOf(":"));
-           count = parseInt(collection[a].substring(collection[a].indexOf(":")+1));
-      }
-    	else{
-          character = collection[a];
-          count = 1;
-        }
-    	for (b = 0; b <= outputCount; b++){
-    		if (output[b].name == character){
-    			output[b].summary = output[b].summary + count;
-    			exist = true;
-    		  }
-    		 else
-    			exist = false;
-    	  }
-    	  if (!exist){
-    		outputCount++;
-    		output[outputCount] = {name:character, summary:count};
-    	  }
-    	  }
-    	 return output;
-}
+	var objectA=[];
+	var temp = [];
+	collection.forEach(myFunction);
+	var i;
+	
+		function myFunction(value1, index, array) {
+			var TempAmt = 1;
+			var TempLetter = value1;
+			if (value1.split('').length>1)
+			{
+				TempAmt = parseInt(value1.match(/(\d+)/)[0]);
+				TempLetter = value1.match(/([a-zA-Z]+)/)[0];
+			}
+			
+			var count1 = 0;
+			for (i=0;i<objectA.length;i++)
+			{
+				if (TempLetter==objectA[i].name)
+				{
+					objectA[i].summary=objectA[i].summary+TempAmt;
+					count1 = 1;
+				}	
+			}
+			if(count1 != 1)
+			{
+				var temp = {"name":TempLetter,"summary":TempAmt};
+				objectA.push(temp);
+			}
+		}
+	
+	return objectA;
+    }

@@ -1,19 +1,20 @@
 'use strict';
 
-function collectSameElements(collectionA, objectB) {
-  var output = [];
-  var r = 0;
-  var a;
-  var b;
-  var Alength = collectionA.length;
-  var B = objectB.value;
-  var Blength = B.length;
-  for (a = 0; a < Alength; a++)
-	  for (b = 0; b < Blength; b++)
-		  if (Object.values(collectionA[a]) == B[b]) {
-			  output[r] = B[b];
-			  r++;
-		  }
-	console.log (output);
-	return output;
+function collectSameElements(collectionA, collectionB) {
+	var same= [];
+	var i=0;
+	var countB=collectionB.value.length;
+	var collectionB1 = collectionB.value;
+	collectionA.forEach(myFunction);
+	
+	function myFunction(value, index, array) {
+		for (i=0;i<countB;i++)
+		{
+			if (value.key[0]==collectionB1[i])
+			{
+				same.push(collectionB1[i]); 
+			}
+		}
+	}
+	return same;
 }

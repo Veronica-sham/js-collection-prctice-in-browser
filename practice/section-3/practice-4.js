@@ -1,57 +1,48 @@
 'use strict';
 
-function countSameElements(collection) {
-    var collectionLength = collection.length;
-    var character;
-    var count;
-    var output = [];
-    var outputCount = 0;
-    var exist = false;
-    var a = 1;
-    var b = 0;
-    output[0] = {key:collection[0], count:1};
-    for (a = 1; a < collectionLength; a++){
-    if (collection[a].includes("-")){
-  	  character = collection[a].substring(0,collection[a].indexOf("-"));
-  	  count = parseInt(collection[a].substring(collection[a].indexOf("-")+1));
-      }
-  	else{
-        character = collection[a];
-        count=1;
-      }
-  	for (b = 0; b <= outputCount; b++){
-  		if (output[b].key == collection[a]){
-  			output[b].count = output[b].count + 1;
-  			exist = true;
-  		  }
-  		 else
-  			exist = false;
-  	  }
-  	  if (!exist){
-  		outputCount++;
-  		output[outputCount] = {key:character, count:count};
-  	  }
-  	  }
-  	 return output;
-    }
-
-
 function createUpdatedCollection(collectionA, objectB) {
-   var a;
-   var b;
-   var A = countSameElements(collectionA);
-   var Alength = A.length;
-   var B = objectB.value;
-   var Blength = B.length;
-   var characterCount = 0;
-     for (b = 0; b < Blength; b++){
-        for (a = 0; a < Alength; a++){
-         if (A[a].key == B[b]){
-         A[a].count = A[a].count - ~~(A[a].count/3)
-         }
-       }
-     }
-         console.log(A);
-         return A;
-     }
+	var objectA=[];
+	var temp = [];
+	collectionA.forEach(myFunction);
+	var i;
+	
+		function myFunction(value1, index, array) {	
+			var TempAmt = 1;
+			var TempLetter = value1;
+			if (value1.split('').length>1)
+			{
+				TempAmt = parseInt(value1.match(/(\d+)/)[0]);
+				TempLetter = value1.match(/([a-zA-Z]+)/)[0];
+			}
+			
+			var count1 = 0;
+			for (i=0;i<objectA.length;i++)
+			{
+				if (TempLetter==objectA[i].key)
+				{
+					objectA[i].count=objectA[i].count+TempAmt;
+					count1 = 1;
+				}	
+			}
+			if(count1 != 1)
+			{
+				var temp = {"key":TempLetter,"count":TempAmt};
+				objectA.push(temp);
+			}
+		}
+	objectA.forEach(myFunction2);
+		function myFunction2(value2, index2, array2) {	
+				for (i=0;i<objectB.value.length;i++)
+				{
+					if(objectB.value[i]==value2.key)
+					{
+						if (value2.count/3>=1)
+						{
+							value2.count=value2.count-parseInt(value2.count/3);
+						}			
+					}			
+				}
+		}
+	return objectA;
+   }
 

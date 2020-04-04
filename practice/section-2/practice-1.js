@@ -1,26 +1,27 @@
 'use strict';
 
 function countSameElements(collection) {
-  var collectionLength = collection.length;
-  var output = [];
-  var outputCount = 0;
-  var exist = false;
-  var a = 1;
-  var b = 0;
-  output[0] = {key:collection[0], count:1};
-  for (a = 1; a< collectionLength; a++){
-	  for (b = 0; b<=outputCount; b++){
-		  if (output[b].key == collection[a]){
-			  output[b].count = output[b].count +1;
-			  exist = true;			 
-		  }
-		 else
-			exist = false; 
-	  }
-	  if (!exist){
-		outputCount++;
-		output[outputCount] = {key:collection[a], count:1};
-	  }
-  }
-  return output;
+	var objectA=[];
+	var temp = [];
+	collection.forEach(myFunction);
+	var i;
+	
+		function myFunction(value1, index, array) {
+			var count1 = 0;
+			for (i=0;i<objectA.length;i++)
+			{
+				if (value1==objectA[i].key)
+				{
+					objectA[i].count=objectA[i].count+1;
+					count1 = 1;
+				}	
+			}
+			if(count1 != 1)
+			{
+				var temp = {"key":value1,"count":1};
+				objectA.push(temp);
+			}
+		}
+	
+	return objectA;
 }
